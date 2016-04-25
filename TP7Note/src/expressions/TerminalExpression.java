@@ -1,10 +1,18 @@
 package expressions;
 
-public class TerminalExpression {
+public class TerminalExpression implements Expression{
+	
+	private String value;
 
-	public TerminalExpression() {
-		// TODO Auto-generated constructor stub
+	public TerminalExpression(String value) {
+		this.value = value;	
 	}
+
+	@Override
+	public Double solve() {
+		return Double.parseDouble(this.value);
+	}
+	
 
 }
  
