@@ -5,39 +5,34 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+ /**
+ * Conversion d'une expression en notation postfixee
+ * code inspire d'un exemple de l'algo de shunting-yard par Andrei Ciobanu
+ * et adapte aux besoin du projet
+ **/
 public class InfixToPostfix {
-	// Associativity constants for operators
+	
 	private static final int LEFT_ASSOC = 0;
 	private static final int RIGHT_ASSOC = 1;
 
-	// Supported operators
+	
 	private static final Map<String, int[]> OPERATORS = new HashMap<String, int[]>();
 	static {
-		// Map<"token", []{precendence, associativity}>
 		OPERATORS.put("+", new int[] { 0, LEFT_ASSOC });
 		OPERATORS.put("-", new int[] { 0, LEFT_ASSOC });
 		OPERATORS.put("*", new int[] { 5, LEFT_ASSOC });
 		OPERATORS.put("/", new int[] { 5, LEFT_ASSOC });
-		OPERATORS.put("%", new int[] { 5, LEFT_ASSOC });
+		//OPERATORS.put("%", new int[] { 5, LEFT_ASSOC });
 		OPERATORS.put("^", new int[] { 10, RIGHT_ASSOC });
 	}
 
-	/**
-	 * Test if a certain is an operator .
-	 * @param token The token to be tested .
-	 * @return True if token is an operator . Otherwise False .
-	 */
-	private static boolean isOperator(String token) {
+
+	private boolean isOperator(String token) {
 		return OPERATORS.containsKey(token);
 	}
 
-	/**
-	 * Test the associativity of a certain operator token .
-	 * @param token The token to be tested (needs to operator).
-	 * @param type LEFT_ASSOC or RIGHT_ASSOC
-	 * @return True if the tokenType equals the input parameter type .
-	 */
-	private static boolean isAssociative(String token, int type) {
+
+	private boolean isAssociative(String token, int type) {
 		if (!isOperator(token)) {
 			throw new IllegalArgumentException("Invalid token: " + token);
 		}
@@ -47,60 +42,68 @@ public class InfixToPostfix {
 		return false;
 	}
 
-	/**
-	 * Compare precendece of two operators.
-	 * @param token1 The first operator .
-	 * @param token2 The second operator .
-	 * @return A negative number if token1 has a smaller precedence than token2,
-	 * 0 if the precendences of the two tokens are equal, a positive number
-	 * otherwise.
-	 */
-	private static final int cmpPrecedence(String token1, String token2) {
+
+	private int cmpPrecedence(String token1, String token2) {
 		if (!isOperator(token1) || !isOperator(token2)) {
 			throw new IllegalArgumentException("Invalied tokens: " + token1
 					+ " " + token2);
 		}
 		return OPERATORS.get(token1)[0] - OPERATORS.get(token2)[0];
 	}
+	
+	public String[] stringOptimize(String s){ 
+		//suppression des espaces
+		s = s.replaceAll("\\p{Space}", "");
+		//remplace (-x) par (0-x)
+		s = s.replaceAll("\\(-(\\d+)\\)", "(0-$1)");
+		//remplace (-(0-x)) par (0-(0-x))
+		s = s.replaceAll("\\(-(\\(0-\\d+\\))\\)", "(0-$1)");
+		//création d'un tableau de string contenant chaque opérateurs et opérandes
+		String[] sarray = s.split("(?<=[-+*/^()])|(?=[-+*/^()])");
+		
+		return sarray;
+		
+		// \(-\d+\)
+	}
 
 	public String inToPost(String infixexpr) {
 		
-		infixexpr = infixexpr.replaceAll("\\p{Space}", "");
-		String[] inputTokens = infixexpr.split("(?<=[-+*/^()])|(?=[-+*/^()])");
+		
+		String[] inputTokens = this.stringOptimize(infixexpr);
 
 		ArrayList<String> out = new ArrayList<String>();
 		Stack<String> stack = new Stack<String>();
-		// For all the input tokens [S1] read the next token [S2]
+		// pour chaque caractere
 		for (String token : inputTokens) {
 			if (isOperator(token)) {
-				// If token is an operator (x) [S3]
+				// si c'est un opérateur
 				while (!stack.empty() && isOperator(stack.peek())) {
-					// [S4]
+					
 					if ((isAssociative(token, LEFT_ASSOC) && cmpPrecedence(
 							token, stack.peek()) <= 0)
 							|| (isAssociative(token, RIGHT_ASSOC) && cmpPrecedence(
 									token, stack.peek()) < 0)) {
-						out.add(stack.pop()); 	// [S5] [S6]
+						out.add(stack.pop()); 	
 						continue;
 					}
 					break;
 				}
-				// Push the new operator on the stack [S7]
+				// empiler nouvel opérateur
 				stack.push(token);
 			} else if (token.equals("(")) {
-				stack.push(token); 	// [S8]
+				stack.push(token); 	
 			} else if (token.equals(")")) {
-				// [S9]
+				
 				while (!stack.empty() && !stack.peek().equals("(")) {
-					out.add(stack.pop()); // [S10]
+					out.add(stack.pop()); 
 				}
-				stack.pop(); // [S11]
+				stack.pop(); 
 			} else {
-				out.add(token); // [S12]
+				out.add(token); 
 			}
 		}
 		while (!stack.empty()) {
-			out.add(stack.pop()); // [S13]
+			out.add(stack.pop()); 
 		}
 		
 		StringBuffer sb = new StringBuffer();
