@@ -4,7 +4,7 @@ public class MultiplicationExpression implements Expression {
 
 	private Expression leftSide;
 	private Expression rightSide;
-	
+
 	public MultiplicationExpression() {
 		// TODO Auto-generated constructor stub
 	}
@@ -14,4 +14,8 @@ public class MultiplicationExpression implements Expression {
 		return this.leftSide.solve() * this.rightSide.solve();
 	}
 
+	@Override
+	public boolean isOperator() {
+		return true;
+	}
 }

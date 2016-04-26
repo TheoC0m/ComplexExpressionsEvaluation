@@ -1,18 +1,20 @@
 package expressions;
 
-public class TerminalExpression implements Expression{
-	
+public class TerminalExpression implements Expression {
+
 	private String value;
 
 	public TerminalExpression(String value) {
-		this.value = value;	
+		this.value = value;
 	}
 
 	@Override
 	public Double solve() {
 		return Double.parseDouble(this.value);
 	}
-	
 
+	@Override
+	public boolean isOperator() {
+		return false;
+	}
 }
- 

@@ -1,10 +1,10 @@
 package expressions;
 
 public class SubstractionExpression implements Expression {
-	
+
 	private Expression leftSide;
 	private Expression rightSide;
-	
+
 	public SubstractionExpression() {
 	}
 
@@ -13,4 +13,8 @@ public class SubstractionExpression implements Expression {
 		return this.leftSide.solve() - this.rightSide.solve();
 	}
 
+	@Override
+	public boolean isOperator() {
+		return true;
+	}
 }
