@@ -20,9 +20,11 @@ public class Calculator {
 	public double Solve(String equation){
 		
 		
-		
+		//transformation de l'expression en notation postfixee
 		String postfixequation = conversion.inToPost(equation);
+		//construction de l'arbre a partir de l'expression postfixe
 		Expression tree = tb.build(postfixequation, expfact);
+		//evaluation de l'expression 
 		double res = tree.solve();
 		return res;
 	}

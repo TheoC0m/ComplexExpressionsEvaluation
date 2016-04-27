@@ -13,6 +13,11 @@ public class InfixToPostfix {
 
 	private static final int LEFT_ASSOC = 0;
 	private static final int RIGHT_ASSOC = 1;
+	private StringManipulation stringmanip;
+	
+	public InfixToPostfix(){
+		this.stringmanip = new StringManipulation();
+	}
 
 	private static final Map<String, int[]> OPERATORS = new HashMap<String, int[]>();
 
@@ -46,36 +51,9 @@ public class InfixToPostfix {
 		return OPERATORS.get(token1)[0] - OPERATORS.get(token2)[0];
 	}
 
-	public String[] stringOptimize(String s) {
-		// suppression des espaces
-		s = s.replaceAll("\\p{Space}", "");
-		//remplace les , par des .
-		s = s.replaceAll(",", ".");
-		
-		//remplace -(-x) par (0-(0-x))
-		s = s.replaceAll("^.{0}\\(*-\\(+(-\\d+(\\.\\d+)?)\\)+","(0-(0$1))");
-		
-		/* remplace (-x) par (0-x) ou (-x.y) par (0-x.y)
-		s = s.replaceAll("\\(-(\\d+(\\.\\d+)?)\\)", "(0-$1)");
-		// remplace (-(0-x)) par (0-(0-x))
-		s = s.replaceAll("\\(-(\\(0-\\d+(\\.\\d+)?\\))\\)", "(0-$1)");
-		*/
-		
-		//remplace (-x) par (0-x), (-(-x)) par (0-(0-x)) etc
-		s = s.replaceAll("(\\(+)-", "$10-");
-		
-		// création d'un tableau de string contenant chaque opérateurs et
-		// opérandes
-		String[] sarray = s.split("(?<=[-+*/^()])|(?=[-+*/^()])");
-
-		return sarray;
-
-		// \(-\d+\)
-	}
-
 	public String inToPost(String infixexpr) {
 
-		String[] inputTokens = this.stringOptimize(infixexpr);
+		String[] inputTokens = this.stringmanip.stringOptimize(infixexpr);
 
 		ArrayList<String> out = new ArrayList<String>();
 		Stack<String> stack = new Stack<String>();

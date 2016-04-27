@@ -177,7 +177,7 @@ public class InfixToPostfixTest {
 	@Test
 	public void test1_5() {
 		InfixToPostfix conv = new InfixToPostfix();
-		assertEquals("0 1 -", conv.inToPost("-1"));
+		assertEquals("0 1 -", conv.inToPost("-(1)"));
 	}
 	
 	/*@Test
