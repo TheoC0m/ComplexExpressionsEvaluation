@@ -1,5 +1,6 @@
 package tools;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 import expressions.AbstractOperatorExpression;
@@ -16,7 +17,11 @@ public class TreeBuild {
 
 		Stack<Expression> lastinserted = new Stack<Expression>();
 		// creation tableau de string contenant les operandes et operateurs
-		String[] tokenarray = postfixexpr.split("(?<=[-+*/^])|(?=[-+*/^])");
+		//NECESSITE JAVA 8 CAR LES VERSIONS ANTERIEURS N'ONT PAS LE MEME COMPORTEMENT SUR CETTE FONCTION !!!!!
+		String[] tokenarray = postfixexpr.split("\\s+");
+		
+		
+		
 
 		// on construit la racine de l'abre avec le premier token
 		Expression racine = expfact.getExpression(tokenarray[tokenarray.length - 1]);
@@ -28,8 +33,9 @@ public class TreeBuild {
 			throw new ArithmeticException("la racine doit être un operateur");
 		}
 
+		
 		// on lit l'expression postfixe de droite a gauche
-		for (int i = tokenarray.length - 2; i <= 0; i--) {
+		for (int i = tokenarray.length - 2; i >= 0; i--) {
 			// on construit l'objet correspondant a l'element suivant
 			Expression e = expfact.getExpression(tokenarray[i]);
 

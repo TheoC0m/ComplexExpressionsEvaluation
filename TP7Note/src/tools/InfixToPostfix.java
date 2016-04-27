@@ -118,6 +118,8 @@ public class InfixToPostfix {
 			}
 		}
 		return sb.toString().substring(1);
+		
+	
 
 	}
 }

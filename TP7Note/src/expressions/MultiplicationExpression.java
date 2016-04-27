@@ -1,9 +1,6 @@
 package expressions;
 
-public class MultiplicationExpression extends AbstractOperatorExpression{
-
-	private Expression leftSide;
-	private Expression rightSide;
+public class MultiplicationExpression extends AbstractOperatorExpression {
 
 	public MultiplicationExpression() {
 		// TODO Auto-generated constructor stub

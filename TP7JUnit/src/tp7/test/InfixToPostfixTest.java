@@ -7,6 +7,8 @@ import org.junit.Test;
 import tools.InfixToPostfix; 
 
 public class InfixToPostfixTest {
+	
+
 
 	/*
 	 * Test simple
@@ -170,6 +172,12 @@ public class InfixToPostfixTest {
 	public void test1_4() {
 		InfixToPostfix conv = new InfixToPostfix();
 		assertEquals("0 1 -", conv.inToPost("((-1))"));
+	}
+	
+	@Test
+	public void test1_5() {
+		InfixToPostfix conv = new InfixToPostfix();
+		assertEquals("0 1 -", conv.inToPost("-1"));
 	}
 	
 	/*@Test

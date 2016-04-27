@@ -2,9 +2,6 @@ package expressions;
 
 public class SubstractionExpression extends AbstractOperatorExpression {
 
-	private Expression leftSide;
-	private Expression rightSide;
-
 	public SubstractionExpression() {
 	}
 
