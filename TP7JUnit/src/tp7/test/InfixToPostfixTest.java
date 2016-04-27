@@ -115,7 +115,7 @@ public class InfixToPostfixTest {
 	@Test
 	public void test12() {
 		InfixToPostfix conv = new InfixToPostfix();
-		assertEquals("0 0 5 - -", conv.inToPost("(-(-5))"));
+		assertEquals("0 0 0 5 - - -", conv.inToPost("(-(-(-5)))"));
 	}
 	
 	/*
