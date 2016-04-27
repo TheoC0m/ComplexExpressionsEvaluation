@@ -46,9 +46,9 @@ public class StringManipulation {
 		//valid si meme nb parenth et pas de -x ou de x(...)
 		boolean valid = true;
 		valid = !(wrongParenthNumber || wrongParenthOrder || s.matches("^(-\\d+(\\.\\d+)?)$") || 
-				s.matches("\\d+(\\.\\d+)?\\(+") );
+				s.matches(".*\\d+(\\.\\d+)?\\(+.*") );
 		
-		boolean test = s.matches("\\d+(\\.\\d+)?\\(+");
+		
 		
 		if(valid){
 			return true;

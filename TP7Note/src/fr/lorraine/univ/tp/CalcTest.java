@@ -9,7 +9,7 @@ public class CalcTest {
 	public static void main(String[] args) {
 		Calculator calc = new Calculator();
 		
-System.out.println("9+6.3(8*9)".matches("\\d+(\\.\\d+)?\\(+"));
+System.out.println("9+9*3-8(-9)".matches(".*\\d+(\\.\\d+)?\\(+.*"));
 		System.out.println("-1 : " + calc.Solve("(-1)"));
 		System.out.println("1 : " + calc.Solve("-(-1)"));
 		System.out.println("1 : " + calc.Solve("(-(-1))"));
