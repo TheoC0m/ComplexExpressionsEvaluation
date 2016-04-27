@@ -55,10 +55,16 @@ public class InfixToPostfix {
 		//remplace -(-x) par (0-(0-x))
 		s = s.replaceAll("^.{0}\\(*-\\(+(-\\d+(\\.\\d+)?)\\)+","(0-(0$1))");
 		
-		// remplace (-x) par (0-x) ou (-x.y) par (0-x.y)
+		/* remplace (-x) par (0-x) ou (-x.y) par (0-x.y)
 		s = s.replaceAll("\\(-(\\d+(\\.\\d+)?)\\)", "(0-$1)");
 		// remplace (-(0-x)) par (0-(0-x))
 		s = s.replaceAll("\\(-(\\(0-\\d+(\\.\\d+)?\\))\\)", "(0-$1)");
+		*/
+		
+		//remplace (-x) par (0-x), (-(-x)) par (0-(0-x)) etc
+	
+		s = s.replaceAll("(\\(+)-", "$10-");
+		
 		// création d'un tableau de string contenant chaque opérateurs et
 		// opérandes
 		String[] sarray = s.split("(?<=[-+*/^()])|(?=[-+*/^()])");
