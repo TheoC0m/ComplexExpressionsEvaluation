@@ -1,6 +1,6 @@
 package expressions;
 
-public class SumExpression implements Expression {
+public class SumExpression extends AbstractOperatorExpression {
 
 	private Expression leftSide;
 	private Expression rightSide;

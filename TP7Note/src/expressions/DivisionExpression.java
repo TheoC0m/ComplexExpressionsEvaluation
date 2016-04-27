@@ -1,6 +1,6 @@
 package expressions;
 
-public class DivisionExpression implements Expression {
+public class DivisionExpression extends AbstractOperatorExpression{
 
 	private Expression leftSide;
 	private Expression rightSide;

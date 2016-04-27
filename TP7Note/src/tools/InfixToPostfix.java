@@ -62,7 +62,6 @@ public class InfixToPostfix {
 		*/
 		
 		//remplace (-x) par (0-x), (-(-x)) par (0-(0-x)) etc
-	
 		s = s.replaceAll("(\\(+)-", "$10-");
 		
 		// création d'un tableau de string contenant chaque opérateurs et

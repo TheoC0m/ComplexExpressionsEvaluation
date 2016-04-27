@@ -2,16 +2,16 @@ package expressions;
 
 public class ExpressionFactory {
 
-	private ExpressionFactory instance;
+	private static ExpressionFactory instance;
 
 	private ExpressionFactory() {
 	}
 
-	public ExpressionFactory getInstance() {
-		if (this.instance == null) {
-			this.instance = new ExpressionFactory();
+	public static ExpressionFactory getInstance() {
+		if (instance == null) {
+			instance = new ExpressionFactory();
 		}
-		return this.instance;
+		return instance;
 	}
 
 	public Expression getExpression(String token) {
@@ -45,7 +45,7 @@ public class ExpressionFactory {
 				break;
 
 			default:
-				throw new ArithmeticException();
+				throw new ArithmeticException("pas d'expression correspondant a ce symbole");
 
 			}
 		}

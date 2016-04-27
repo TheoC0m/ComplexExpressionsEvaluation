@@ -1,6 +1,6 @@
 package expressions;
 
-public class SubstractionExpression implements Expression {
+public class SubstractionExpression extends AbstractOperatorExpression {
 
 	private Expression leftSide;
 	private Expression rightSide;

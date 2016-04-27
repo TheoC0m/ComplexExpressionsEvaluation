@@ -1,6 +1,6 @@
 package expressions;
 
-public class MultiplicationExpression implements Expression {
+public class MultiplicationExpression extends AbstractOperatorExpression{
 
 	private Expression leftSide;
 	private Expression rightSide;
