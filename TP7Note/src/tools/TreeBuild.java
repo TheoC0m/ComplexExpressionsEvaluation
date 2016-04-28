@@ -16,7 +16,7 @@ public class TreeBuild {
 	public Expression build(String postfixexpr, ExpressionFactory expfact) {
 
 		Stack<Expression> lastinserted = new Stack<Expression>();
-		// creation tableau de string contenant les operandes et operateurs
+		// creation tableau de string contenant 1 operande/operateur par case
 		//NECESSITE JAVA 8 CAR LES VERSIONS ANTERIEURS N'ONT PAS LE MEME COMPORTEMENT SUR CETTE FONCTION !!!!!
 		String[] tokenarray = postfixexpr.split("\\s+");
 		
@@ -71,6 +71,9 @@ public class TreeBuild {
 						// le fils gauche n'est pas libre : on depile (pour
 						// remonter dans l'arbre)
 						lastinserted.pop();
+						if(lastinserted.empty()){
+							throw new ArithmeticException("pile vide : expression incorrecte");
+						}
 					}
 				}
 

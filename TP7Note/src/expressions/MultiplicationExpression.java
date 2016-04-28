@@ -8,7 +8,12 @@ public class MultiplicationExpression extends AbstractOperatorExpression {
 
 	@Override
 	public Double solve() {
+		if(this.leftSide != null && this.rightSide != null){
 		return this.leftSide.solve() * this.rightSide.solve();
+		}
+		else{
+			throw new ArithmeticException("une operande est manquante");
+		}
 	}
 
 	@Override

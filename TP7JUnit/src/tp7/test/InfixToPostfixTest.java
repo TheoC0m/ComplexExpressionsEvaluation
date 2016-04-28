@@ -129,6 +129,12 @@ public class InfixToPostfixTest {
 		assertEquals("0 0 7 - -", conv.inToPost("-(-7)"));
 	}
 	
+	@Test
+	public void test13_2() {
+		InfixToPostfix conv = new InfixToPostfix();
+		assertEquals("0 0 7 + +", conv.inToPost("+(+7)"));
+	}
+	
 	/*
 	 * Test nombre decimal
 	 */
@@ -174,11 +180,6 @@ public class InfixToPostfixTest {
 		assertEquals("0 1 -", conv.inToPost("((-1))"));
 	}
 	
-	@Test
-	public void test1_5() {
-		InfixToPostfix conv = new InfixToPostfix();
-		assertEquals("0 1 -", conv.inToPost("-(1)"));
-	}
 	
 	/*@Test
 	public void test() {

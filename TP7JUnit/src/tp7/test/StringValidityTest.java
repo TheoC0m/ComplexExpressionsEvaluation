@@ -52,6 +52,30 @@ public class StringValidityTest {
 		sm.isValid("5+()-4");
 	}
 	
+	@Test
+	public void test6() {
+		thrown.expect(ArithmeticException.class);
+		sm.isValid("+5");
+	}
+	
+	@Test
+	public void test7() {
+		thrown.expect(ArithmeticException.class);
+		sm.isValid("*6");
+	}
+	
+	@Test
+	public void test8() {
+		thrown.expect(ArithmeticException.class);
+		sm.isValid("/5");
+	}
+	
+	
+	@Test
+	public void test10() {
+		thrown.expect(ArithmeticException.class);
+		sm.isValid("127(.");
+	}
 	/*@Test
 	public void test() {
 		thrown.expect(ArithmeticException.class);

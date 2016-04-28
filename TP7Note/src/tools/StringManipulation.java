@@ -11,16 +11,24 @@ public class StringManipulation {
 		s = s.replaceAll("\\p{Space}", "");
 		// remplace les , par des .
 		s = s.replaceAll(",", ".");
-		// remplace -(-x) par (0-(0-x))
+		// remplace -(-x) par (0-(0-x)) 
 		s = s.replaceAll("^.{0}\\(*-\\(+(-\\d+(\\.\\d+)?)\\)+", "(0-(0$1))");
-		// remplace (-x) par (0-x), (-(-x)) par (0-(0-x)) etc
+		//remplace +(+x) par 0+0+x
+		s = s.replaceAll("^.{0}\\(*\\+\\(+(\\+\\d+(\\.\\d+)?)\\)+", "0+(0$1)");
+		
+		
+		// remplace (-x) par (0-x), (-(-x)) par (0-(0-x)) etc idem avec +
 		s = s.replaceAll("(\\(+)-", "$10-");
 
 		// création d'un tableau de string contenant chaque opérateurs et
 		// opérandes
+		if(this.isValid(s)){
 		String[] sarray = s.split("(?<=[-+*/^()])|(?=[-+*/^()])");
-
 		return sarray;
+		}
+		else{ 
+			throw new ArithmeticException();
+		}
 
 		// \(-\d+\)
 	}
@@ -44,15 +52,17 @@ public class StringManipulation {
 
 
 		/*valid si
+		* pas chaine vide
 		* bon ordre de parenthese
 		* meme nb parenth
-		* pas de -x 
+		* pas de -x, +x, /x, *x seul
 		* pas de x(...)
 		* pas de ()
 		*/
 		boolean valid = true;
-		valid = !(wrongParenthNumber || wrongParenthOrder || s.matches("^(-\\d+(\\.\\d+)?)$") || 
-				s.matches(".*\\d+(\\.\\d+)?\\(+.*") || s.matches(".*\\(\\).*"));
+		valid = !(s.isEmpty() || wrongParenthNumber || wrongParenthOrder || s.matches("^(-\\d+(\\.\\d+)?)$") || 
+				s.matches("^(\\+\\d+(\\.\\d+)?)$") || s.matches("^(/\\d+(\\.\\d+)?)$") ||
+				s.matches("^(\\*\\d+(\\.\\d+)?)$") || s.matches(".*\\d+(\\.\\d+)?\\(+.*") || s.matches(".*\\(\\).*"));
 		
 		
 		
