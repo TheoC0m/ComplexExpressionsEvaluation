@@ -12,13 +12,19 @@ public class StringManipulation {
 		// remplace les , par des .
 		s = s.replaceAll(",", ".");
 		// remplace -(-x) par (0-(0-x)) 
-		s = s.replaceAll("^.{0}\\(*-\\(+(-\\d+(\\.\\d+)?)\\)+", "(0-(0$1))");
+		s = s.replaceAll("^(\\(*-\\(+(-\\d+(\\.\\d+)?)\\))", "(0$1)");
 		//remplace +(+x) par 0+0+x
 		s = s.replaceAll("^.{0}\\(*\\+\\(+(\\+\\d+(\\.\\d+)?)\\)+", "0+(0$1)");
 		
-		
+		//\(+-\(+-|(-\d+(\.\d+)?\)+$)
 		// remplace (-x) par (0-x), (-(-x)) par (0-(0-x)) etc idem avec +
-		s = s.replaceAll("(\\(+)-", "$10-");
+		//s = s.replaceAll("(\\(+)-", "$10-");
+		
+		//remplace (-x) par (0-x)
+		s = s.replaceAll("(\\(+)(-\\d+(\\.\\d+)?)(\\)+)", "$10$2$4");
+		
+		
+		//idee pour les (-(-(-8))) : \(-\(
 
 		// création d'un tableau de string contenant chaque opérateurs et
 		// opérandes

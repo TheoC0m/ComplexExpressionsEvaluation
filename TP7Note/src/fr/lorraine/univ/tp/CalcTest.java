@@ -24,7 +24,7 @@ public class CalcTest {
 		System.out.println("0 : "+calc.Solve("((((((10+8+2+5+5)/2)*(-1))+(10*2))+5)/2)+(-5)"));
 		//System.out.println("error : "+calc.Solve("5/(((((((10+8+2+5+5)/2)*(-1))+(10*2))+5)/2)+(-5))"));
 		System.out.println("error : " + calc.Solve("(5+5)+7-(1)9"));*/
-		System.out.println("err : " + calc.Solve("-(1)"));
+		System.out.println("err : " + calc.Solve("4+(-(-8))*7"));
 	
 	}
 
