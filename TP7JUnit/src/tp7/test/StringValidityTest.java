@@ -46,6 +46,12 @@ public class StringValidityTest {
 		sm.isValid("((54+6)*7))");
 	}
 	
+	@Test
+	public void test5() {
+		thrown.expect(ArithmeticException.class);
+		sm.isValid("5+()-4");
+	}
+	
 	/*@Test
 	public void test() {
 		thrown.expect(ArithmeticException.class);

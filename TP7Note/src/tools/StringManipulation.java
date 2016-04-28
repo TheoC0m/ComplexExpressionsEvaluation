@@ -43,10 +43,16 @@ public class StringManipulation {
 		
 
 
-		//valid si meme nb parenth et pas de -x ou de x(...)
+		/*valid si
+		* bon ordre de parenthese
+		* meme nb parenth
+		* pas de -x 
+		* pas de x(...)
+		* pas de ()
+		*/
 		boolean valid = true;
 		valid = !(wrongParenthNumber || wrongParenthOrder || s.matches("^(-\\d+(\\.\\d+)?)$") || 
-				s.matches(".*\\d+(\\.\\d+)?\\(+.*") );
+				s.matches(".*\\d+(\\.\\d+)?\\(+.*") || s.matches(".*\\(\\).*"));
 		
 		
 		
